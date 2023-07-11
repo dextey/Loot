@@ -3,6 +3,7 @@ import { currentUser } from "./routes/currentUser";
 import { signin } from "./routes/signin";
 import { signup } from "./routes/signup";
 import { signout } from "./routes/signout";
+import { handleError } from "../middlewares/errorHandler";
 
 const PORT = 5000;
 
@@ -17,6 +18,8 @@ app.use("/api", currentUser);
 app.get("/", (req, res) => {
   res.send(`Express server running`);
 });
+
+app.use(handleError);
 
 app.listen(PORT, () => {
   console.log(`auth listening on port ${PORT}`);
