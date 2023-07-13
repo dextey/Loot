@@ -1,10 +1,11 @@
 import { Router, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import { handleError } from "../../middlewares/errorHandler";
+import { RequestValidationError } from "../../errors/requestValidationError";
+import { DatabaseConnectionError } from "../../errors/databaseConnectionError";
 
 const router = Router();
 
-router.get(
+router.post(
   "/users/signup",
   [
     body("email").isEmail().withMessage("Please enter a valid email"),
@@ -13,7 +14,7 @@ router.get(
   (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new Error("Invalid email or password");
+      throw new RequestValidationError(errors.array());
     }
 
     try {
@@ -22,7 +23,7 @@ router.get(
       const { email, password } = req.body;
       res.json({ user: email });
     } catch (error) {
-      throw new Error("Database down");
+      throw new DatabaseConnectionError();
     }
   }
 );
