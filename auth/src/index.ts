@@ -1,4 +1,5 @@
 import express from "express";
+import "express-async-errors";
 import { currentUser } from "./routes/currentUser";
 import { signin } from "./routes/signin";
 import { signup } from "./routes/signup";
@@ -20,7 +21,7 @@ app.get("/", (req, res) => {
   res.send(`Express server running`);
 });
 
-app.get("*", () => {
+app.all("*", (req, res) => {
   throw new NotFoundError();
 });
 
