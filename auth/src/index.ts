@@ -4,6 +4,7 @@ import { signin } from "./routes/signin";
 import { signup } from "./routes/signup";
 import { signout } from "./routes/signout";
 import { handleError } from "../middlewares/errorHandler";
+import { NotFoundError } from "../errors/notFoundError";
 
 const PORT = 5000;
 
@@ -17,6 +18,10 @@ app.use("/api", currentUser);
 
 app.get("/", (req, res) => {
   res.send(`Express server running`);
+});
+
+app.get("*", () => {
+  throw new NotFoundError();
 });
 
 app.use(handleError);
