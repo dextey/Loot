@@ -6,6 +6,7 @@ import { signup } from "./routes/signup";
 import { signout } from "./routes/signout";
 import { handleError } from "../middlewares/errorHandler";
 import { NotFoundError } from "../errors/notFoundError";
+import mongoose from "mongoose";
 
 const PORT = 5000;
 
@@ -27,6 +28,17 @@ app.all("*", (req, res) => {
 
 app.use(handleError);
 
-app.listen(PORT, () => {
-  console.log(`auth listening on port ${PORT}`);
-});
+const start = async () => {
+  try {
+    await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
+    console.log("Successfully connected to MongoDB");
+
+    app.listen(PORT, () => {
+      console.log(`auth listening on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+start();
