@@ -28,7 +28,7 @@ app.all("*", (req, res) => {
 
 app.use(handleError);
 
-const start = async () => {
+const start_server = async () => {
   try {
     await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
     console.log("Successfully connected to MongoDB");
@@ -37,8 +37,8 @@ const start = async () => {
       console.log(`auth listening on port ${PORT}`);
     });
   } catch (error) {
-    console.error(error);
+    console.log("Error Connection to DB");
   }
 };
 
-start();
+start_server();
