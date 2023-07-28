@@ -8,10 +8,20 @@ import { handleError } from "../middlewares/errorHandler";
 import { NotFoundError } from "../errors/notFoundError";
 import mongoose from "mongoose";
 
+import cookieSession from "cookie-session";
+
 const PORT = 5000;
 
 const app = express();
+app.set("trust proxy", true);
 app.use(express.json());
+
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true,
+  })
+);
 
 app.use("/api", signin);
 app.use("/api", signup);

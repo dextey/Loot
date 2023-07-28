@@ -4,6 +4,7 @@ import { RequestValidationError } from "../../errors/requestValidationError";
 import { DatabaseConnectionError } from "../../errors/databaseConnectionError";
 import { UserModel } from "../models/UserModel";
 import { GeneralError } from "../../errors/generalError";
+import jwt from "jsonwebtoken";
 
 const router = Router();
 
@@ -31,6 +32,10 @@ router.post(
     try {
       const user = UserModel.build({ email, password });
       await user.save();
+
+      const token = jwt.sign({ id: user.id, email: user.email }, "secret");
+
+      req.session = { jwt: token };
 
       res.status(201).json({ user });
     } catch (error) {
