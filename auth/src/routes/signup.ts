@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken";
 
 const router = Router();
 
+const SECRET_KEY = process.env.JWT_KEY;
+
 router.post(
   "/users/signup",
   [
@@ -33,9 +35,9 @@ router.post(
       const user = UserModel.build({ email, password });
       await user.save();
 
-      const token = jwt.sign({ id: user.id, email: user.email }, "secret");
+      const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY!);
 
-      req.session = { jwt: token };
+      req.session = { token: token };
 
       res.status(201).json({ user });
     } catch (error) {

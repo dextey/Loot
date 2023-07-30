@@ -40,6 +40,10 @@ app.use(handleError);
 
 const start_server = async () => {
   try {
+    if (!process.env.JWT_KEY) {
+      throw new Error("JWT_KEY missing");
+    }
+
     await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
     console.log("Successfully connected to MongoDB");
 
