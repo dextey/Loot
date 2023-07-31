@@ -51,7 +51,7 @@ const start_server = async () => {
       console.log(`auth listening on port ${PORT}`);
     });
   } catch (error) {
-    console.log("Error Connection to DB");
+    console.log(error);
   }
 };
 
