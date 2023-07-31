@@ -4,6 +4,7 @@ import { DatabaseConnectionError } from "../../errors/databaseConnectionError";
 import { UserModel } from "../models/UserModel";
 import { GeneralError } from "../../errors/generalError";
 import jwt from "jsonwebtoken";
+import { validateRequest } from "../../middlewares/validateRequest";
 
 const router = Router();
 
@@ -15,7 +16,7 @@ router.post(
     body("email").isEmail().withMessage("Please enter a valid email"),
     body("password").trim().isLength({ min: 6 }).withMessage("Please enter a secure password"),
   ],
-  validationResult,
+  validateRequest,
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
