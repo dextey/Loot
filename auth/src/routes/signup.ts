@@ -8,8 +8,6 @@ import { validateRequest } from "../../middlewares/validateRequest";
 
 const router = Router();
 
-const SECRET_KEY = process.env.JWT_KEY;
-
 router.post(
   "/users/signup",
   [
@@ -29,8 +27,7 @@ router.post(
       const user = UserModel.build({ email, password });
       await user.save();
       console.log("Creating a new User");
-
-      const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY!);
+      const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_KEY!);
 
       req.session = { token: token };
 
