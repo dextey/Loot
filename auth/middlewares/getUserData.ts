@@ -20,9 +20,11 @@ export const userData = (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const payload = jwt.verify(req.session.jwt, process.env.JWT_KEY!) as UserPayload;
+    const payload = jwt.verify(req.session.token, process.env.JWT_KEY!) as UserPayload;
     req.userData = payload;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 
   next();
 };
