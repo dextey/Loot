@@ -17,3 +17,10 @@ spec:
                 name: auth-srv
                 port:
                   number: 5000
+          - path: /?(.*) # always place client at the end so that ingress can match other routes | if place above, all routes will be send to client-srv
+            pathType: Prefix
+            backend:
+              service:
+                name: client-srv
+                port:
+                  number: 3000
