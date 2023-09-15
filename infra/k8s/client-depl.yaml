@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: client
-          image: dextey/client
+          image: dextey/client:0.0.1
+          imagePullPolicy: Never
 
 ---
 apiVersion: v1

@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: auth
-          image: dextey/auth
+          image: dextey/auth:0.0.1 # modified for local env using minikube
+          imagePullPolicy: Never
           env:
             - name: JWT_KEY
               valueFrom:
