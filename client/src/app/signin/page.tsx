@@ -1,6 +1,8 @@
 "use client";
 
+import { URL_CONSTANTS } from "@/constants";
 import axios from "axios";
+import Link from "next/link";
 import { useState } from "react";
 
 function page() {
@@ -12,14 +14,14 @@ function page() {
 
   const onSubmit = () => {
     axios
-      .post("/api/users/signin", { email: data.email, password: data.password })
+      .post(URL_CONSTANTS.signIn, { email: data.email, password: data.password })
       .then((res) => console.log(res.data))
-      .catch((err) => {});
+      .catch(({ response }) => console.log(response.data));
   };
 
   return (
-    <div className="flex flex-col p-4 justify-center items-center">
-      <div className="flex flex-col text-center font-black ">
+    <div className="flex flex-col p-4 justify-center items-center bg-purple-300 h-screen w-full overflow-hidden">
+      <div className="flex flex-col text-center font-black text-white ">
         <div className="text-[9rem]">Loot</div>
         <div className="text-[2rem]">just grab your tickets</div>
       </div>
@@ -28,7 +30,7 @@ function page() {
           onChange={onChange}
           type="email"
           name="email"
-          className="px-4 my-2 p-3 text-xl font-medium  border-none bg-purple-200"
+          className="px-4 my-2 p-3 text-xl font-medium  border-none bg-purple-200 rounded-lg text-slate-700 focus:outline-none"
           placeholder="email"
         />
       </div>
@@ -37,18 +39,21 @@ function page() {
           onChange={onChange}
           type="password"
           name="password"
-          className="px-4 my-2 p-3 text-xl font-medium  border-none bg-purple-200"
+          className="px-4 my-2 p-3 text-xl font-medium  border-none bg-purple-200 rounded-lg text-slate-700 focus:outline-none"
           placeholder="password"
         />
       </div>
 
-      <div className="p-3">
+      <div className="p-3 flex flex-col gap-2 items-center ">
         <button
           onClick={onSubmit}
           className=" my-2 p-3 text-2xl font-black rounded-2xl border-none bg-purple-200 text-purple-700 px-10"
         >
           lets go
         </button>
+        <Link href={"/signup"} className=" font-bold pt-10 text-violet-600 drop-shadow-lg">
+          signup here
+        </Link>
       </div>
     </div>
   );
