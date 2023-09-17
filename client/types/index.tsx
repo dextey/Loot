@@ -3,6 +3,7 @@ export type AxiosMethod = {
   method: "get" | "delete" | "post" | "put";
   data?: Object;
   option?: Object;
+  onSuccess: () => void;
 };
 
 export type TextInputProps = {
