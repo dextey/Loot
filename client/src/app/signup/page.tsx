@@ -1,3 +1,5 @@
+"use client";
+
 import { URL_CONSTANTS } from "@/constants";
 import { useRequest } from "@/hooks/useRequest";
 import { TextInput } from "@/ui/input/Textinput";
@@ -5,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-function signup() {
+function page() {
   const router = useRouter();
   const [data, setData] = useState({ email: "", password: "", confirmPassword: "" });
   const { request, errors, setErrors } = useRequest({
@@ -25,7 +27,7 @@ function signup() {
   };
 
   return (
-    <div className="flex flex-col p-4 justify-center items-center bg-violet-400 h-screen w-full">
+    <div className="flex flex-col p-4 justify-center items-center">
       <div className="flex flex-col text-center font-black ">
         <div className="text-[9rem]">Loot</div>
         <div className="text-[2rem]">just grab your tickets</div>
@@ -60,4 +62,4 @@ function signup() {
   );
 }
 
-export default signup;
+export default page;

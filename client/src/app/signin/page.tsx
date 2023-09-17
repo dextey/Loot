@@ -1,18 +1,35 @@
-import Link from "next/link";
-import React from "react";
+"use client";
 
-function signin() {
-  const [data, setData] = React.useState({ email: "", password: "" });
+import { URL_CONSTANTS } from "@/constants";
+import { useRequest } from "@/hooks/useRequest";
+import axios from "axios";
+import Link from "next/link";
+import { useState } from "react";
+
+function page() {
+  const [data, setData] = useState({ email: "", password: "" });
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+
+  const { request, errors } = useRequest({
+    url: URL_CONSTANTS.signIn,
+    method: "post",
+    data: data,
+    onSuccess: () => {},
+  });
+
+  const onSubmit = () => {
+    request();
+  };
+
   return (
     <div className="flex flex-col p-4 justify-center items-center bg-purple-300 h-screen w-full overflow-hidden">
       <div className="flex flex-col text-center font-black text-white ">
         <div className="text-[9rem]">Loot</div>
         <div className="text-[2rem]">just grab your tickets</div>
       </div>
-
+      {errors}
       <div className="p-3">
         <input
           onChange={onChange}
@@ -34,7 +51,7 @@ function signin() {
 
       <div className="p-3 flex flex-col gap-2 items-center ">
         <button
-          //   onClick={onSubmit}
+          onClick={onSubmit}
           className=" my-2 p-3 text-2xl font-black rounded-2xl border-none bg-purple-200 text-purple-700 px-10"
         >
           lets go
@@ -47,4 +64,4 @@ function signin() {
   );
 }
 
-export default signin;
+export default page;
