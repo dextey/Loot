@@ -1,7 +1,8 @@
+import { CurrentUser } from "@/types";
 import Link from "next/link";
 import { BiHeart, BiUser } from "react-icons/bi";
 
-function Navbar() {
+function Navbar({ currentUser }: { currentUser: CurrentUser }) {
   return (
     <div className="flex justify-between w-full px-4 p-3 m-2 rounded-md bg-violet-200 text-violet-600 items-center">
       <div className="text-3xl font-black mx-2">Loot</div>
@@ -9,9 +10,7 @@ function Navbar() {
         <span>
           <BiHeart />
         </span>
-        <Link href={"/signin"}>
-          <BiUser />
-        </Link>
+        {currentUser ? <BiUser /> : <Link href={"/signin"}>sign in</Link>}
       </div>
     </div>
   );

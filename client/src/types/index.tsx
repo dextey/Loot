@@ -13,3 +13,13 @@ export type TextInputProps = {
   className?: string;
   placeholder: string;
 };
+
+export type CurrentUser =
+  | {
+      id: string;
+      email: string;
+      iat: number;
+    }
+  | null
+  | ""
+  | undefined;
