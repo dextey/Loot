@@ -10,6 +10,7 @@ export async function getData(cookie: string): Promise<CurrentUser> {
       Cookie: "session=" + cookie,
     },
   };
+
   try {
     const response = await axios.get(URL_CONSTANTS.currentUser, customHeaders);
     return response.data?.currentUser;
