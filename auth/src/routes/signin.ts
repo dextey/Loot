@@ -1,8 +1,7 @@
 import { Router, Request, Response } from "express";
 import { body } from "express-validator";
-import { validateRequest } from "../../middlewares/validateRequest";
 import { UserModel } from "../models/UserModel";
-import { GeneralError } from "../../errors/generalError";
+import { GeneralError, validateRequest } from "@lootick/common";
 import { Hash } from "../utils/hash";
 import jwt from "jsonwebtoken";
 const router = Router();

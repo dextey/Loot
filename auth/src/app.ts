@@ -4,8 +4,8 @@ import { currentUser } from "./routes/currentUser";
 import { signin } from "./routes/signin";
 import { signup } from "./routes/signup";
 import { signout } from "./routes/signout";
-import { handleError } from "../middlewares/errorHandler";
-import { NotFoundError } from "../errors/notFoundError";
+import { handleError, NotFoundError } from "@lootick/common";
+
 import cors from "cors";
 import cookieSession from "cookie-session";
 
@@ -13,7 +13,7 @@ const app = express();
 app.set("trust proxy", true);
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({ credentials: true }));
 
 app.use(
   cookieSession({

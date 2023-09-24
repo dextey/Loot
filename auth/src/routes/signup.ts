@@ -1,10 +1,8 @@
 import { Router, Request, Response } from "express";
-import { body, validationResult } from "express-validator";
-import { DatabaseConnectionError } from "../../errors/databaseConnectionError";
+import { body } from "express-validator";
+import { DatabaseConnectionError, GeneralError, validateRequest } from "@lootick/common";
 import { UserModel } from "../models/UserModel";
-import { GeneralError } from "../../errors/generalError";
 import jwt from "jsonwebtoken";
-import { validateRequest } from "../../middlewares/validateRequest";
 
 const router = Router();
 

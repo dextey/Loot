@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userData } from "../../middlewares/getUserData";
+import { userData } from "@lootick/common";
 
 const router = Router();
 
